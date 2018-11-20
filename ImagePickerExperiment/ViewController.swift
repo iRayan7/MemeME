@@ -60,23 +60,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         unsubscribeFromKeyboardNotifications()
     }
     
-
-
-    
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
-        let pickerController = UIImagePickerController()
-        // to pass the image to the main view
-        pickerController.delegate = self
-        present(pickerController, animated: true, completion: nil)
+       showImagePicker(source: .photoLibrary)
     }
     
     @IBAction func pickAnImageFromCamera(_ sender: Any) {
+        showImagePicker(source: .camera)
+    }
+    
+    func showImagePicker(source : UIImagePickerController.SourceType) {
         let cameraPickerController = UIImagePickerController()
         cameraPickerController.delegate = self
-        // changing the pickerController to a camera
-        cameraPickerController.sourceType = .camera
+        // changing the pickerController to a camera or album
+        cameraPickerController.sourceType = source
         present(cameraPickerController, animated: true, completion: nil)
     }
+
     
     // UIImagePickerControllerDelegate functions
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
