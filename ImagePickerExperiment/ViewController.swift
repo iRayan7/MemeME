@@ -145,7 +145,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let memedImage = generateMemedImage()
     
         // Create the meme
-        var meme = Meme(topText: topTextfield.text!, bottomText: bottomTextfield.text!, originalImage: imagePickerView.image!, memedImage: memedImage)
+        var meme = Meme(topText: topTextfield.text!, bottomText: bottomTextfield.text!, originalImage: imagePickerView.image!, memedImage: memedImage
+        )
+        
+        // add the meme to memes array on the application deletage
+        (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
+        
+        print("////////////\((UIApplication.shared.delegate as! AppDelegate).memes.count)//////////")
+
     }
 
     func generateMemedImage() -> UIImage {
@@ -193,6 +200,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return true
     }
 
+    @IBAction func cancelPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
 }
 
